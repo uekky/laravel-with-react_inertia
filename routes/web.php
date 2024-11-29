@@ -12,3 +12,6 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
+
+use App\Http\Controllers\UserController;
+Route::get('/user', [UserController::class, 'index'])->name('user');
