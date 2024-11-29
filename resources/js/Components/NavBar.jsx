@@ -1,20 +1,41 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
+import "./NavBar.css";
 
 const NavBar = () => {
+    const { url, component } = usePage();
     return (
-        <nav>
-            <ul>
-                <li>
-                    <Link href={route("welcome")}>Welcome</Link>
-                </li>
-                <li>
-                    <Link href={route("about")}>About</Link>
-                </li>
-                <li>
-                    <Link href={route("user")}>User</Link>
-                </li>
-            </ul>
-        </nav>
+        <>
+            <div>URL : {url}</div>
+            <div>Component : {component}</div>
+            <nav>
+                <ul>
+                    <li>
+                        <Link
+                            href={route("welcome")}
+                            className={url === "/user" ? "active" : ""}
+                        >
+                            Welcome
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={route("about")}
+                            className={url === "/about" ? "active" : ""}
+                        >
+                            About
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={route("user")}
+                            className={url.startsWith("/user") ? "active" : ""}
+                        >
+                            User
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+        </>
     );
 };
 
