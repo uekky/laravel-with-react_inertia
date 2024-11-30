@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "@inertiajs/react";
-import NavBar from "../Components/NavBar";
+import Layout from "../Layouts/Layout";
 
 const Welcome = ({ greeting }) => {
     useEffect(() => {
@@ -8,10 +7,9 @@ const Welcome = ({ greeting }) => {
     }, []);
 
     return (
-        <>
-            <NavBar />
+        <Layout>
             <h1>{greeting} Inertia.js</h1>
-        </>
+        </Layout>
     );
 };
 

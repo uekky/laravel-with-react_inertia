@@ -8,11 +8,11 @@ const NavBar = () => {
             <div>URL : {url}</div>
             <div>Component : {component}</div>
             <nav>
-                <ul>
+                <ul className="menu">
                     <li>
                         <Link
                             href={route("welcome")}
-                            className={url === "/user" ? "active" : ""}
+                            className={url === "/" ? "active" : ""}
                         >
                             Welcome
                         </Link>
