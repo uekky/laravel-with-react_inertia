@@ -18,6 +18,9 @@ class UserController extends Controller
         return Inertia::render('User/Create');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -48,9 +51,6 @@ class UserController extends Controller
         }
         //ユーザ登録処理
         User::create($validated);
-
-        $request->session()->put('message','ユーザの作成が完了しました');
-
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('message', 'ユーザの作成が完了しました');
     }
 }
