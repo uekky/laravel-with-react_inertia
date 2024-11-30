@@ -21,7 +21,7 @@ const Create = ({ errors }) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        router.post("/user", values);
+        router.post("/user", values, { errorBag: "createUser" });
     }
 
     return (
@@ -37,7 +37,9 @@ const Create = ({ errors }) => {
                             value={values.name}
                             onChange={handleChange}
                         />
-                        {errors.name && <p>{errors.name}</p>}
+                        {errors.createUser && errors.createUser.name && (
+                            <p>{errors.createUser.name}</p>
+                        )}
                     </div>
                     <div>
                         <label htmlFor="email">メールアドレス:</label>
@@ -46,7 +48,9 @@ const Create = ({ errors }) => {
                             value={values.email}
                             onChange={handleChange}
                         />
-                        {errors.email && <p>{errors.email}</p>}
+                        {errors.createUser && errors.createUser.email && (
+                            <p>{errors.createUser.email}</p>
+                        )}
                     </div>
 
                     <div>
@@ -57,7 +61,9 @@ const Create = ({ errors }) => {
                             onChange={handleChange}
                             type="password"
                         />
-                        {errors.password && <p>{errors.password}</p>}
+                        {errors.createUser && errors.createUser.password && (
+                            <p>{errors.createUser.password}</p>
+                        )}
                     </div>
                     <button type="submit">Submit</button>
                 </form>
