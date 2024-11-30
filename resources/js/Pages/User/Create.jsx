@@ -1,27 +1,16 @@
-import { useState } from "react";
 import Layout from "../../Layouts/Layout";
-import { router, Head } from "@inertiajs/react";
-import PropTypes from "prop-types";
+import { Head, useForm } from "@inertiajs/react";
 
-const Create = ({ errors }) => {
-    const [values, setValues] = useState({
+const Create = () => {
+    const { data, setData, post, errors, processing } = useForm({
         name: "",
         email: "",
         password: "",
     });
 
-    function handleChange(e) {
-        const key = e.target.id;
-        const value = e.target.value;
-        setValues((values) => ({
-            ...values,
-            [key]: value,
-        }));
-    }
-
-    function handleSubmit(e) {
+    function onSubmit(e) {
         e.preventDefault();
-        router.post("/user", values, { errorBag: "createUser" });
+        post("/user");
     }
 
     return (
@@ -29,53 +18,48 @@ const Create = ({ errors }) => {
             <Head title="ユーザの登録"></Head>
             <h1>ユーザの登録</h1>
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={onSubmit}>
                     <div>
                         <label htmlFor="name">名前:</label>
                         <input
                             id="name"
-                            value={values.name}
-                            onChange={handleChange}
+                            value={data.name}
+                            onChange={(e) => setData("name", e.target.value)}
                         />
-                        {errors.createUser && errors.createUser.name && (
-                            <p>{errors.createUser.name}</p>
-                        )}
+                        {errors.name && <div>{errors.name}</div>}
                     </div>
+
                     <div>
                         <label htmlFor="email">メールアドレス:</label>
                         <input
                             id="email"
-                            value={values.email}
-                            onChange={handleChange}
+                            value={data.email}
+                            onChange={(e) => setData("email", e.target.value)}
                         />
-                        {errors.createUser && errors.createUser.email && (
-                            <p>{errors.createUser.email}</p>
-                        )}
+                        {errors.email && <div>{errors.email}</div>}
                     </div>
 
                     <div>
                         <label htmlFor="password">パスワード:</label>
                         <input
                             id="password"
-                            value={values.password}
-                            onChange={handleChange}
+                            value={data.password}
+                            onChange={(e) =>
+                                setData("password", e.target.value)
+                            }
                             type="password"
                         />
-                        {errors.createUser && errors.createUser.password && (
-                            <p>{errors.createUser.password}</p>
-                        )}
+                        {errors.password && <div>{errors.password}</div>}
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={processing}>
+                        {processing ? "登録中..." : "登録"}
+                    </button>
                 </form>
             </div>
         </>
     );
 };
 
-Create.layout = (page) => <Layout>{page}</Layout>;
-
-Create.propTypes = {
-    errors: PropTypes.object,
-};
+Create.layout = (page) => <Layout children={page} />;
 
 export default Create;
