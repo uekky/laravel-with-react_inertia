@@ -1,7 +1,8 @@
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import Layout from "../Layouts/Layout";
 
 const About = () => {
+    const { appName } = usePage().props;
     return (
         <>
             <Head>
@@ -17,7 +18,7 @@ const About = () => {
                     content="About,ページ,説明文"
                 />
             </Head>
-            <h1>About</h1>
+            <h1>About | {appName}</h1>
         </>
     );
 };

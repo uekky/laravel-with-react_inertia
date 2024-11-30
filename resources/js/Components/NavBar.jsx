@@ -4,18 +4,22 @@ import "./NavBar.css";
 
 const NavBar = () => {
     const { url, component } = usePage();
+    const { appName } = usePage().props;
+
     useEffect(() => {
         console.log("Mount NavBar");
         return () => {
             console.log("UnMount NavBar");
         };
     }, []);
+
     return (
         <>
             <div>URL : {url}</div>
             <div>Component : {component}</div>
             <nav>
                 <ul className="menu">
+                    <li>{appName}</li>
                     <li>
                         <Link
                             href={route("welcome")}
