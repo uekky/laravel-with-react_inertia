@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
+import { Head } from "@inertiajs/react";
 import Layout from "../../Layouts/Layout";
 
 const Index = (props) => {
     return (
         <>
+            <Head title="ユーザ一覧ページ" />
             <h1>ユーザ一覧</h1>
             <ul>
                 {props.users.map((user) => (
