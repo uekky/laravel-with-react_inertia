@@ -14,7 +14,18 @@ const Index = (props) => {
             </div>
             <ul>
                 {props.users.map((user) => (
-                    <li key={user.id}>{user.name}</li>
+                    <li
+                        key={user.id}
+                        style={{ display: "flex", alignItems: "center" }}
+                    >
+                        {user.avatar_file_path && (
+                            <img
+                                src={user.avatar_file_path}
+                                style={{ width: "30px" }}
+                            />
+                        )}
+                        <span>{user.name}</span>
+                    </li>
                 ))}
             </ul>
         </>

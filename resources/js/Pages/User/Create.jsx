@@ -3,9 +3,10 @@ import { Head, useForm } from "@inertiajs/react";
 
 const Create = () => {
     const { data, setData, post, errors, processing } = useForm({
-        name: "",
-        email: "",
-        password: "",
+        name: "hoge" + Math.random(),
+        email: "hoge" + Math.random() + "@example.com",
+        password: "password",
+        avatar: "",
     });
 
     function onSubmit(e) {
@@ -18,7 +19,7 @@ const Create = () => {
             <Head title="ユーザの登録"></Head>
             <h1>ユーザの登録</h1>
             <div>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} encType="multipart/form-data">
                     <div>
                         <label htmlFor="name">名前:</label>
                         <input
@@ -50,6 +51,27 @@ const Create = () => {
                             type="password"
                         />
                         {errors.password && <div>{errors.password}</div>}
+                    </div>
+                    <div>
+                        <label htmlFor="avatar">画像:</label>
+                        <input
+                            type="file"
+                            onChange={(e) =>
+                                setData("avatar", e.target.files[0])
+                            }
+                        />
+
+                        {/*
+                        複数ファイルの時はこう書く
+                        <input
+                            type="file"
+                            multiple // 複数ファイル選択を可能にする
+                            onChange={(e) =>
+                                setData("avatar", Array.from(e.target.files)) // すべてのファイルを配列として取得
+                            }
+                        />
+                        */}
+                        {errors.avatar && <div>{errors.avatar}</div>}
                     </div>
                     <button type="submit" disabled={processing}>
                         {processing ? "登録中..." : "登録"}
