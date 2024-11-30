@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import Layout from "../../Layouts/Layout";
 
 const Index = (props) => {
@@ -7,6 +7,11 @@ const Index = (props) => {
         <>
             <Head title="ユーザ一覧ページ" />
             <h1>ユーザ一覧</h1>
+            <div>
+                <Link href={route("user.create")} as="button" type="button">
+                    ユーザ登録
+                </Link>
+            </div>
             <ul>
                 {props.users.map((user) => (
                     <li key={user.id}>{user.name}</li>

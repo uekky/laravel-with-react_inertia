@@ -34,7 +34,7 @@ const NavBar = () => {
                     </li>
                     <li>
                         <Link
-                            href={route("user")}
+                            href={route("user.index")}
                             className={url.startsWith("/user") ? "active" : ""}
                         >
                             User

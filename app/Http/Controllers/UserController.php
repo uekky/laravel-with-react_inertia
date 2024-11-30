@@ -13,4 +13,20 @@ class UserController extends Controller
             'users' => User::all()
         ]);
     }
+
+    public function create(){
+        return Inertia::render('User/Create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'max:50'],
+            'password' => ['required', 'max:50'],
+            'email' => ['required', 'max:50', 'email'],
+        ]);
+        //ユーザ登録処理
+        User::create($validated);
+        return redirect()->route('user.index');
+    }
 }
