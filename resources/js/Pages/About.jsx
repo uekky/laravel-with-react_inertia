@@ -1,11 +1,9 @@
 import Layout from "../Layouts/Layout";
 
 const About = () => {
-    return (
-        <Layout>
-            <h1>About</h1>
-        </Layout>
-    );
+    return <h1>About</h1>;
 };
+
+About.layout = (page) => <Layout>{page}</Layout>;
 
 export default About;
