@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import "./NavBar.css";
 
 const NavBar = () => {
     const { url, component } = usePage();
+    useEffect(() => {
+        console.log("Mount NavBar");
+        return () => {
+            console.log("UnMount NavBar");
+        };
+    }, []);
     return (
         <>
             <div>URL : {url}</div>
