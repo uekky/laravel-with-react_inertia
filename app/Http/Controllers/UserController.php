@@ -48,6 +48,9 @@ class UserController extends Controller
         }
         //ユーザ登録処理
         User::create($validated);
+
+        $request->session()->put('message','ユーザの作成が完了しました');
+
         return redirect()->route('user.index');
     }
 }

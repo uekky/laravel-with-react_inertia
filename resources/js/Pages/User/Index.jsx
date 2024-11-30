@@ -1,12 +1,19 @@
 import PropTypes from "prop-types";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import Layout from "../../Layouts/Layout";
 
 const Index = (props) => {
+    const { flash } = usePage().props;
+
     return (
         <>
             <Head title="ユーザ一覧ページ" />
             <h1>ユーザ一覧</h1>
+            {flash.message && (
+                <div style={{ color: "red", fontWeight: "bold" }}>
+                    {flash.message}
+                </div>
+            )}
             <div>
                 <Link href={route("user.create")} as="button" type="button">
                     ユーザ登録
